@@ -12,23 +12,27 @@ const useStyles = makeStyles((theme) => ({
     alignItems: 'center',
     justifyContent: 'center',
     display: 'flex',
-    height: '270px'
+    height: '280px',
   }
 }));
 
 export default function AlbumList({ data }) {
   const classes = useStyles();
+
+
+  // Loading until data retrieved from api
   if (Object.keys(data).length === 0) {
     return (<p> Loading... </p>)
   }
 
-  // console.log(data)
+  console.log(data)
   return (
     <div className={classes.grid}>
       <Grid container spacing={1}>
         {Object.keys(data).map((keyName, keyIndex) => {
           return (
-            <Grid item xs={2} className={classes.elements}>
+            // Each Album listed
+            <Grid item xs={6} sm={5} md={3} lg={2} className={classes.elements}>
               <Album {...data[keyName]} />
             </Grid>
           )
