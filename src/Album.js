@@ -7,7 +7,7 @@ import Grid from '@material-ui/core/Grid';
 const useStyles = makeStyles({
     root: {
         width: 204,
-        height: 244,
+        height: 264,
         backgroundColor: "#414141",
         borderTopLeftRadius: 46,
         borderTopRightRadius: 46,
@@ -19,8 +19,6 @@ const useStyles = makeStyles({
         width: 204,
         height: 72,
         right: 0,
-        // left: 50,
-        // top: 233,
         background: "#A53131",
         borderTopLeftRadius: 46,
         borderTopRightRadius: 46,
@@ -31,8 +29,9 @@ const useStyles = makeStyles({
         height: 80,
         width: 80,
         zIndex: 1000,
-        paddingTop: 10,
-        position: "relative"
+        margin: 10,
+        position: "relative",
+        background: "#414141"
     },
     albumTitle: {
         color: "white",
@@ -49,9 +48,11 @@ const useStyles = makeStyles({
     }
 });
 
+
+
 export default function Album(props) {
     const classes = useStyles();
-    //examplestring.split('"')[1]
+    // console.log(props)
     return (
         <>
             {/* Actual Album Card */}
@@ -68,7 +69,7 @@ export default function Album(props) {
 
                     {/* Album Cover */}
                     <Grid item>
-                        <img className={classes.album} src="https://i.pinimg.com/originals/c5/30/52/c53052a1bfbd92bcd48b63389d5de8bf.jpg" />
+                        <img className={classes.album} src={props.albumCover} />
                     </Grid>
 
                     {/* Album Name */}
@@ -78,6 +79,7 @@ export default function Album(props) {
                             {props["Albums"]}
                         </Typography>
                     </Grid>
+
                     {/* Artist */}
                     <Grid item>
                         <Typography className={classes.albumTitle}>
