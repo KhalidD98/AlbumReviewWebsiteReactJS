@@ -24,8 +24,6 @@ export default function AlbumList({ data }) {
   if (Object.keys(data).length === 0) {
     return (<p> Loading... </p>)
   }
-
-  console.log(data)
   return (
     <div className={classes.grid}>
       <Grid container spacing={1}>

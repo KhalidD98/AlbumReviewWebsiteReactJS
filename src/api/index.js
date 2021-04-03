@@ -10,6 +10,7 @@ export const fetchData = async () => {
             client_email: creds.client_email,
             private_key: creds.private_key
         })
+
         await doc.loadInfo();
         const data = await doc.sheetsByIndex[0].getRows()
         Object.keys(data).map(async (keyName, keyIndex) => {
@@ -29,6 +30,7 @@ export const fetchData = async () => {
             const art = await albumArt(data[keyName]["Albums"], { album: data[keyName]["Artist"], size: 'small' })
             data[keyName].albumCover = art
         })
+
         return data
     } catch (error) {
 
