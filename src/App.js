@@ -13,6 +13,9 @@ const useStyles = makeStyles({
     background: '#424242',
     width: '25ch',
     textAlign: 'center',
+  },
+  albums: {
+    width: '90%'
   }
 })
 
@@ -32,7 +35,7 @@ function App() {
 
 
   return (
-    <Grid container
+    <Grid container spacing={0}
       direction="column"
       alignItems="center"
       justify="center"
@@ -46,7 +49,7 @@ function App() {
       </Grid>
 
       {/* Album List */}
-      <Grid item>
+      <Grid item className={classes.albums}>
         <AlbumList data={data} searchTerm={searchTerm}/>
       </Grid>
 
