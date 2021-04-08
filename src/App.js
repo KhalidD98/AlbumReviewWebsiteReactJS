@@ -49,6 +49,7 @@ function App() {
       </Grid>
 
       {/* Album List */}
+      {/* {console.log(data["0"].art)} */}
       <Grid item className={classes.albums}>
         <AlbumList data={data} searchTerm={searchTerm}/>
       </Grid>
