@@ -1,7 +1,4 @@
 import { GoogleSpreadsheet } from 'google-spreadsheet';
-console.log(process.env.REACT_APP_GOOGLE_SPREADSHEET_KEY)
-console.log(process.env.REACT_APP_CLIENT_EMAIL)
-console.log(process.env.REACT_APP_PRIVATE_KEY)
 
 export const fetchData = async () => {
     try {
