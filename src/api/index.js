@@ -1,4 +1,7 @@
 import { GoogleSpreadsheet } from 'google-spreadsheet';
+console.log(process.env.REACT_APP_GOOGLE_SPREADSHEET_KEY)
+console.log(process.env.REACT_APP_CLIENT_EMAIL)
+console.log(process.env.REACT_APP_PRIVATE_KEY)
 
 export const fetchData = async () => {
     try {
@@ -7,6 +10,7 @@ export const fetchData = async () => {
             client_email: process.env.REACT_APP_CLIENT_EMAIL,
             private_key: process.env.REACT_APP_PRIVATE_KEY.replace(/\\n/g, "\n"),
         })
+
 
         await doc.loadInfo();
         const data = await doc.sheetsByIndex[0].getRows()
