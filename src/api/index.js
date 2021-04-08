@@ -1,6 +1,5 @@
 import { GoogleSpreadsheet } from 'google-spreadsheet';
 const GOOGLE_SPREADSHEET_KEY = process.env.REACT_APP_GOOGLE_SPREADSHEET_KEY
-const albumArt = require('album-art')
 
 export const fetchData = async () => {
     try {
@@ -13,6 +12,8 @@ export const fetchData = async () => {
 
         await doc.loadInfo();
         const data = await doc.sheetsByIndex[0].getRows()
+
+        const dataArray = []
         Object.keys(data).map(async (keyName, keyIndex) => {
             if (data[keyName]["KD's Ratings"] === undefined) {
                 data[keyName]["KD's Ratings"] = ""
@@ -27,12 +28,18 @@ export const fetchData = async () => {
                 delete data[keyName]
                 return false
             }
-            const art = await albumArt(data[keyName]["Albums"], { album: data[keyName]["Artist"], size: 'small' })
-            data[keyName].albumCover = art
+    
+            var tempObject = {
+                artist: data[keyName]["Artist"],
+                album: data[keyName]["Albums"],
+                kdRating: data[keyName]["KD's Ratings"],
+                kyleRating: data[keyName]["Kyle's Ratings"],
+                connorRating: data[keyName]["Connor's Ratings"],
+                art: ""
+            }
+            dataArray.push(tempObject)
         })
-
-        return data
-    } catch (error) {
-
-    }
+        return dataArray
+        // return await getCoverFromApi(data)
+    } catch (error) { console.log(error) }
 }
