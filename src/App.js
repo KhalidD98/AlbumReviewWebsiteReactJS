@@ -1,21 +1,55 @@
 import React, { useState, useEffect } from 'react';
-import AlbumList from './AlbumList'
 import { fetchData } from './api/index'
+import { makeStyles } from '@material-ui/core/styles';
+import { AppBar, Typography } from '@material-ui/core';
 import TextField from '@material-ui/core/TextField';
 import Grid from '@material-ui/core/Grid';
-import { makeStyles } from '@material-ui/core/styles';
+import CopyrightIcon from '@material-ui/icons/Copyright';
+import GitHubIcon from '@material-ui/icons/GitHub';
+import LinkedInIcon from '@material-ui/icons/LinkedIn';
+import Container from '@material-ui/core/Container';
+import AlbumList from './AlbumList'
+
 
 const useStyles = makeStyles({
-  root: {
+  searchGridItem: {
     padding: '100px'
   },
-  main: {
+  searchBar: {
     background: '#424242',
     width: '25ch',
     textAlign: 'center',
   },
-  albums: {
+  albumList: {
     width: '90%'
+  },
+  footerBackground: {
+    background: "#A53131",
+    width: '100%',
+    height: '100px',
+    marginTop: '30px',
+    position:'relative',
+    left:'0',
+    bottom:'0',
+    right:'0',
+  },
+  copyrightText: {
+    fontSize: '11px',
+    color: "#000000",
+  },
+  copyrightLogo: {
+    color: "#000000",
+    margin: '5px'
+  },
+  iconGrid: {
+    marginTop: '30px',
+  },
+  Icons: {
+    color: "#000000",
+    width: '30px',
+    cursor: 'pointer',
+    paddingLeft: '5px',
+    paddingRight: '5px'
   }
 })
 
@@ -33,30 +67,63 @@ function App() {
     fetchMyApi()
   }, [])
 
+  const githubClicked = () => {
+    window.location = 'https://github.com/KhalidD98'
+  }
+  const linkedInClicked = () => {
+    window.location = 'https://www.linkedin.com/in/khaliddakak/'
+  }
+
 
   return (
-    <Grid container spacing={0}
-      direction="column"
-      alignItems="center"
-      justify="center"
-      style={{ minHeight: '100vh' }}>
+    <>
+      <Grid container spacing={0}
+        direction="column"
+        alignItems="center"
+        justify="center"
+        style={{ paddingBottom:'60px' }}>
 
-      {/* Search Bar */}
-      <Grid item className={classes.root}>
-        <form className={classes.main} noValidate autoComplete="off">
-          <TextField onChange={(e) => setSearchTerm(e.target.value)} id="filled-basic" label="Enter Album or Artist" variant="filled" color="secondary" />
-        </form>
-      </Grid>
+        {/* Search Bar */}
+        <Grid item className={classes.searchGridItem}>
+          <form className={classes.searchBar} noValidate autoComplete="off">
+            <TextField onChange={(e) => setSearchTerm(e.target.value)} id="filled-basic" label="Enter Album or Artist" variant="filled" color="secondary" />
+          </form>
+        </Grid>
 
-      {/* Album List */}
-      {/* {console.log(data["0"].art)} */}
-      <Grid item className={classes.albums}>
-        <AlbumList data={data} searchTerm={searchTerm}/>
-      </Grid>
+        {/* Album List */}
+        <Grid item className={classes.albumList}>
+          <AlbumList data={data} searchTerm={searchTerm}/>
+        </Grid>
 
-      {/* Webpage Style */}
-      <style>{'body { background-color: #121212; }'}</style>
-    </Grid >
+        {/* Webpage Style */}
+        <style>{'body { background-color: #121212; }'}</style>
+      </Grid >
+
+      {/* Footer */}
+      <AppBar className={classes.footerBackground}>
+        <Container maxWidth="md">
+          
+          {/* Icons */}
+          <Grid container direction="row"
+            justify="center"
+            alignItems="center" className={classes.iconGrid} >
+            <GitHubIcon onClick={githubClicked} class={classes.Icons}></GitHubIcon>
+            <LinkedInIcon onClick={linkedInClicked} class={classes.Icons}></LinkedInIcon>
+          </Grid>
+
+          {/* Copyright Information */}
+          <Grid
+            container
+            direction="row"
+            justify="center"
+            alignItems="center"
+          >
+            <CopyrightIcon className={classes.copyrightLogo}></CopyrightIcon>
+            <Typography className={classes.copyrightText}>2021 Khalid Dakak</Typography>
+          </Grid>
+        </Container>
+       </AppBar>
+    </>
   )
 }
 
