@@ -53,6 +53,11 @@ const useStyles = makeStyles({
         maxWidth: '120px',
         backgroundColor: "#A53131",
         margin: '6px'
+    },
+    reviewCenter: {
+        alignItems: 'center',
+        justifyContent: 'center',
+        display: 'flex',
     }
 });
 
@@ -93,7 +98,6 @@ export default function Album(data) {
                     {/* Album Name */}
                     <Grid item>
                         <Typography className={classes.albumTitle} style={{fontSize: changeFontSize(data.data.album) + "px"}}>
-                            {/* {Album} */}
                             {data.data.album}
                         </Typography>
                     </Grid>
@@ -108,8 +112,10 @@ export default function Album(data) {
                     </Grid>
 
                     {/* Contains reviews */}
-                    <Grid container>
+                    <Grid container className={classes.reviewCenter}>
+
                         {/* KD Review */}
+                        {data.data.kdRating && // Remove KD review if blank
                         <Grid item>
                             <Typography className={classes.reviewText}>
                                 KD's Review
@@ -118,7 +124,10 @@ export default function Album(data) {
                                 {data.data.kdRating}
                             </Typography>
                         </Grid>
+                        }
+
                         {/* Kyle Review */}
+                        {data.data.kyleRating && // Remove Kyle review if blank
                         <Grid item>
                             <Typography className={classes.reviewText}>
                                 Kyle's Review
@@ -127,7 +136,10 @@ export default function Album(data) {
                                 {data.data.kyleRating}
                             </Typography>
                         </Grid>
+                        }
+
                         {/* Connor Review */}
+                        {data.data.connorRating && // Remove Connor review if blank
                         <Grid item>
                             <Typography className={classes.reviewText}>
                                 Connor's Review
@@ -136,6 +148,7 @@ export default function Album(data) {
                                 {data.data.connorRating}
                             </Typography>
                         </Grid>
+                        }
                     </Grid>
                 </Grid>
             </Card>
