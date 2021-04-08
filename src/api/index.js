@@ -1,13 +1,11 @@
 import { GoogleSpreadsheet } from 'google-spreadsheet';
-const GOOGLE_SPREADSHEET_KEY = process.env.REACT_APP_GOOGLE_SPREADSHEET_KEY
 
 export const fetchData = async () => {
     try {
-        const doc = new GoogleSpreadsheet(GOOGLE_SPREADSHEET_KEY)
-        const creds = require("../assets/client_secret.json");
+        const doc = new GoogleSpreadsheet(process.env.REACT_APP_GOOGLE_SPREADSHEET_KEY)
         await doc.useServiceAccountAuth({
-            client_email: creds.client_email,
-            private_key: creds.private_key
+            client_email: process.env.REACT_APP_CLIENT_EMAIL,
+            private_key: process.env.REACT_APP_PRIVATE_KEY.replace(/\\n/g, "\n"),
         })
 
         await doc.loadInfo();
@@ -40,6 +38,5 @@ export const fetchData = async () => {
             dataArray.push(tempObject)
         })
         return dataArray
-        // return await getCoverFromApi(data)
     } catch (error) { console.log(error) }
 }
