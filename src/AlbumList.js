@@ -32,14 +32,18 @@ export default function AlbumList({data, searchTerm}) {
   return (
     <div className={classes.grid}>
       <Grid container className={classes.center}>
-        {data.filter(album => {
-          if(album.artist.toLowerCase().includes(searchTerm.toLowerCase())){
-            return album.artist.toLowerCase().includes(searchTerm.toLowerCase())
+        {data.filter(temp => {
+          if(temp.artist.toLowerCase().includes(searchTerm.toLowerCase())){
+            return temp.artist.toLowerCase().includes(searchTerm.toLowerCase())
           }
-          else if(album.album.toLowerCase().includes(searchTerm.toLowerCase())){
-            return album.album.toLowerCase().includes(searchTerm.toLowerCase())
+          else if(temp.album.toLowerCase().includes(searchTerm.toLowerCase())){
+            return temp.album.toLowerCase().includes(searchTerm.toLowerCase())
           }
         }).map((value, index) => {
+          // Remove albums with no reviews
+          if(!value.kdRating && !value.connorRating && !value.kyleRating){
+            return null
+          }
           return (
             <Grid item xs={7} sm={5} md={3} lg={2} className={classes.elements} >
               <Album key={index} data={value} />
