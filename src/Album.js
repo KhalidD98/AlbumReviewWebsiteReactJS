@@ -1,8 +1,9 @@
-import React from 'react'
+import React, { useState, useEffect } from 'react';
 import { Card } from '@material-ui/core';
 import Typography from '@material-ui/core/Typography';
 import { makeStyles } from '@material-ui/core/styles';
 import Grid from '@material-ui/core/Grid';
+const albumArt = require('album-art')
 
 const useStyles = makeStyles({
     root: {
@@ -48,11 +49,16 @@ const useStyles = makeStyles({
     }
 });
 
+export default function Album(data) {
+    const classes = useStyles()
 
+    const [albumData, setAlbumData] = useState('')
 
-export default function Album(props) {
-    const classes = useStyles();
-    // console.log(props)
+    useEffect(async () => {
+            const art = await albumArt(data.data.album, { album: data.data.artist, size: 'small' })
+            setAlbumData(art)
+    }, [data])
+
     return (
         <>
             {/* Actual Album Card */}
@@ -69,21 +75,21 @@ export default function Album(props) {
 
                     {/* Album Cover */}
                     <Grid item>
-                        <img className={classes.album} src={props.albumCover} />
+                        <img className={classes.album} src={albumData} />
                     </Grid>
 
                     {/* Album Name */}
                     <Grid item>
                         <Typography className={classes.albumTitle}>
                             {/* {Album} */}
-                            {props["Albums"]}
+                            {data.data.album}
                         </Typography>
                     </Grid>
 
                     {/* Artist */}
                     <Grid item>
                         <Typography className={classes.albumTitle}>
-                            {props["Artist"]}
+                            {data.data.artist}
                         </Typography>
                     </Grid>
 
@@ -95,7 +101,7 @@ export default function Album(props) {
                                 KD's Review
                                     </Typography>
                             <Typography className={classes.reviewText}>
-                                {props["KD's Ratings"]}
+                                {data.data.kdRating}
                             </Typography>
                         </Grid>
                         {/* Kyle Review */}
@@ -104,7 +110,7 @@ export default function Album(props) {
                                 Kyle's Review
                                     </Typography>
                             <Typography className={classes.reviewText}>
-                                {props["Kyle's Ratings"]}
+                                {data.data.kyleRating}
                             </Typography>
                         </Grid>
                         {/* Connor Review */}
@@ -113,7 +119,7 @@ export default function Album(props) {
                                 Connor's Review
                                         </Typography>
                             <Typography className={classes.reviewText}>
-                                {props["Connor's Ratings"]}
+                                {data.data.connorRating}
                             </Typography>
                         </Grid>
                     </Grid>

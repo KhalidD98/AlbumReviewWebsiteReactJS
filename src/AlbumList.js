@@ -5,7 +5,7 @@ import { makeStyles } from '@material-ui/core'
 
 const useStyles = makeStyles((theme) => ({
   grid: {
-    flexGrow: 1,
+    flexGrow: 2,
     width: '100%',
   },
   elements: {
@@ -13,29 +13,29 @@ const useStyles = makeStyles((theme) => ({
     justifyContent: 'center',
     display: 'flex',
     height: '280px',
+  },
+  loading: {
+    color: 'white'
   }
 }));
 
-export default function AlbumList({ data }) {
+export default function AlbumList({data, searchTerm}) {
   const classes = useStyles();
 
-
-  // Loading until data retrieved from api
-  if (Object.keys(data).length === 0) {
-    return (<p> Loading... </p>)
-  }
   return (
     <div className={classes.grid}>
       <Grid container spacing={1}>
-        {Object.keys(data).map((keyName, keyIndex) => {
+
+        {data.filter(album => {
+          return album.artist.toLowerCase().includes(searchTerm.toLowerCase())
+        }).map((value, index) => {
           return (
-            // Each Album listed
-            <Grid item xs={6} sm={5} md={3} lg={2} className={classes.elements}>
-              <Album {...data[keyName]} />
+            <Grid item xs={6} sm={5} md={3} lg={2} className={classes.elements} >
+              <Album key={index} data={value} />
             </Grid>
           )
         })}
       </Grid>
-    </div>
+    </div >
   )
 }
