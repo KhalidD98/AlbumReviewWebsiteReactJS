@@ -8,10 +8,9 @@ Purpose:
 Create a website for people to visit and see our terrible reviews on different albums. 
 
 Planned Features:
-- Allow filtering so users can find albums or artists they care about
+- Allow filtering so users can find albums or artists they care about (COMPLETED)
 - Possibly having a rating system so if people agree or disagree they can let us know
 - A way for users to recommend new albums for us to listen to and review
-- Cover art for all albums from the Spotify API
-- Spotify integration so users can listen to albums while on the site (Spotify premium users only)
+- Cover art for all albums from the Spotify API (COMPLETED)
 
 
