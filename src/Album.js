@@ -61,7 +61,7 @@ const useStyles = makeStyles({
     }
 });
 
-export default function Album(data) {
+export default function Album({data}) {
     const classes = useStyles()
     let albumTitleFontSize = 18
 
@@ -69,8 +69,10 @@ export default function Album(data) {
 
     useEffect(() => {
         async function fetchAlbumArt() {
-            const art = await albumArt(data.data.album, { album: data.data.artist, size: 'small' })
-            setAlbumData(art)
+            if(!data.art){
+                data.art = await albumArt(data.album, { album: data.artist, size: 'small' })
+            }
+            setAlbumData(data.art)
         }
         fetchAlbumArt()
     }, [data])
@@ -100,8 +102,8 @@ export default function Album(data) {
 
                     {/* Album Name */}
                     <Grid item>
-                        <Typography className={classes.albumTitle} style={{fontSize: changeFontSize(data.data.album) + "px"}}>
-                            {data.data.album}
+                        <Typography className={classes.albumTitle} style={{fontSize: changeFontSize(data.album) + "px"}}>
+                            {data.album}
                         </Typography>
                     </Grid>
 
@@ -110,7 +112,7 @@ export default function Album(data) {
                     {/* Artist */}
                     <Grid item>
                         <Typography className={classes.albumTitle} style={{fontSize: "13px"}}>
-                            {data.data.artist}
+                            {data.artist}
                         </Typography>
                     </Grid>
 
@@ -118,37 +120,37 @@ export default function Album(data) {
                     <Grid container className={classes.reviewCenter}>
 
                         {/* KD Review */}
-                        {data.data.kdRating && // Remove KD review if blank
+                        {data.kdRating && // Remove KD review if blank
                         <Grid item>
                             <Typography className={classes.reviewText}>
                                 KD's Review
                                     </Typography>
                             <Typography className={classes.reviewText}>
-                                {data.data.kdRating}
+                                {data.kdRating}
                             </Typography>
                         </Grid>
                         }
 
                         {/* Kyle Review */}
-                        {data.data.kyleRating && // Remove Kyle review if blank
+                        {data.kyleRating && // Remove Kyle review if blank
                         <Grid item>
                             <Typography className={classes.reviewText}>
                                 Kyle's Review
                                     </Typography>
                             <Typography className={classes.reviewText}>
-                                {data.data.kyleRating}
+                                {data.kyleRating}
                             </Typography>
                         </Grid>
                         }
 
                         {/* Connor Review */}
-                        {data.data.connorRating && // Remove Connor review if blank
+                        {data.connorRating && // Remove Connor review if blank
                         <Grid item>
                             <Typography className={classes.reviewText}>
                                 Connor's Review
                                         </Typography>
                             <Typography className={classes.reviewText}>
-                                {data.data.connorRating}
+                                {data.connorRating}
                             </Typography>
                         </Grid>
                         }

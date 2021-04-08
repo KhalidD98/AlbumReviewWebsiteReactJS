@@ -40,6 +40,5 @@ export const fetchData = async () => {
             dataArray.push(tempObject)
         })
         return dataArray
-        // return await getCoverFromApi(data)
     } catch (error) { console.log(error) }
 }
