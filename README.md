@@ -14,3 +14,6 @@ Planned Features:
 - Cover art for all albums from the Spotify API (COMPLETED)
 
 
+Deployed on Netlify
+https://606f4ff280790e00bbfa5d1b--amazing-wescoff-4ed4a7.netlify.app/
+
