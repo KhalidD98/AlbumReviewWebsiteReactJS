@@ -3,11 +3,12 @@ import { Card } from '@material-ui/core';
 import Typography from '@material-ui/core/Typography';
 import { makeStyles } from '@material-ui/core/styles';
 import Grid from '@material-ui/core/Grid';
+import Divider from '@material-ui/core/Divider';
 const albumArt = require('album-art')
 
 const useStyles = makeStyles({
     root: {
-        width: 200,
+        width: 208,
         height: 264,
         backgroundColor: "#414141",
         borderTopLeftRadius: 46,
@@ -17,7 +18,7 @@ const useStyles = makeStyles({
         position: "absolute"
     },
     albumBackground: {
-        width: 200,
+        width: 208,
         height: 72,
         right: 0,
         background: "#A53131",
@@ -46,11 +47,18 @@ const useStyles = makeStyles({
         fontSize: "11px",
         textAlign: "center",
         color: "#EEEEEE",
+    },
+    divider: {
+        width: '100%',
+        maxWidth: '120px',
+        backgroundColor: "#A53131",
+        margin: '6px'
     }
 });
 
 export default function Album(data) {
     const classes = useStyles()
+    let albumTitleFontSize = 18
 
     const [albumData, setAlbumData] = useState('')
 
@@ -58,6 +66,10 @@ export default function Album(data) {
             const art = await albumArt(data.data.album, { album: data.data.artist, size: 'small' })
             setAlbumData(art)
     }, [data])
+
+    const changeFontSize = (word) => {
+        return albumTitleFontSize = albumTitleFontSize - (word.split(' ').length)
+    }
 
     return (
         <>
@@ -80,15 +92,17 @@ export default function Album(data) {
 
                     {/* Album Name */}
                     <Grid item>
-                        <Typography className={classes.albumTitle}>
+                        <Typography className={classes.albumTitle} style={{fontSize: changeFontSize(data.data.album) + "px"}}>
                             {/* {Album} */}
                             {data.data.album}
                         </Typography>
                     </Grid>
 
+                    <Divider className={classes.divider} />
+
                     {/* Artist */}
                     <Grid item>
-                        <Typography className={classes.albumTitle}>
+                        <Typography className={classes.albumTitle} style={{fontSize: "13px"}}>
                             {data.data.artist}
                         </Typography>
                     </Grid>
