@@ -70,12 +70,9 @@ export default function Album({data}) {
     useEffect(() => {
         async function fetchAlbumArt() {
             if(!data.art){
-                const art = await albumArt(data.album, { album: data.artist, size: 'small' })
-                data.art = art
-                setAlbumData(data.art)
-            }else{
-                setAlbumData(data.art)
+                data.art = await albumArt(data.album, { album: data.artist, size: 'small' })
             }
+            setAlbumData(data.art)
         }
         fetchAlbumArt()
     }, [data])
