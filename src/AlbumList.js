@@ -39,6 +39,7 @@ export default function AlbumList({data, searchTerm}) {
           else if(temp.album.toLowerCase().includes(searchTerm.toLowerCase())){
             return temp.album.toLowerCase().includes(searchTerm.toLowerCase())
           }
+          return null
         }).map((value, index) => {
           // Remove albums with no reviews
           if(!value.kdRating && !value.connorRating && !value.kyleRating){

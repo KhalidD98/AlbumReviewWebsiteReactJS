@@ -67,9 +67,12 @@ export default function Album(data) {
 
     const [albumData, setAlbumData] = useState('')
 
-    useEffect(async () => {
+    useEffect(() => {
+        async function fetchAlbumArt() {
             const art = await albumArt(data.data.album, { album: data.data.artist, size: 'small' })
             setAlbumData(art)
+        }
+        fetchAlbumArt()
     }, [data])
 
     const changeFontSize = (word) => {
