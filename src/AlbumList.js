@@ -6,6 +6,8 @@ import { makeStyles } from '@material-ui/core'
 const useStyles = makeStyles((theme) => ({
   grid: {
     display: 'flex',
+    alignItems: 'center',
+    justifyContent: 'center',
     width: '100%',
   },
   elements: {
@@ -16,6 +18,11 @@ const useStyles = makeStyles((theme) => ({
   },
   loading: {
     color: 'white'
+  },
+  center: {
+    alignItems: 'center',
+    justifyContent: 'center',
+    display: 'flex',
   }
 }));
 
@@ -24,7 +31,7 @@ export default function AlbumList({data, searchTerm}) {
 
   return (
     <div className={classes.grid}>
-      <Grid container spacing={1}>
+      <Grid container className={classes.center}>
         {data.filter(album => {
           if(album.artist.toLowerCase().includes(searchTerm.toLowerCase())){
             return album.artist.toLowerCase().includes(searchTerm.toLowerCase())
@@ -34,7 +41,7 @@ export default function AlbumList({data, searchTerm}) {
           }
         }).map((value, index) => {
           return (
-            <Grid item xs={6} sm={5} md={3} lg={2} className={classes.elements} >
+            <Grid item xs={7} sm={5} md={3} lg={2} className={classes.elements} >
               <Album key={index} data={value} />
             </Grid>
           )

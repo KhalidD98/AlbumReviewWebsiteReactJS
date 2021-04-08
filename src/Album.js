@@ -7,7 +7,7 @@ const albumArt = require('album-art')
 
 const useStyles = makeStyles({
     root: {
-        width: 204,
+        width: 200,
         height: 264,
         backgroundColor: "#414141",
         borderTopLeftRadius: 46,
@@ -17,7 +17,7 @@ const useStyles = makeStyles({
         position: "absolute"
     },
     albumBackground: {
-        width: 204,
+        width: 200,
         height: 72,
         right: 0,
         background: "#A53131",
