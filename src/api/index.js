@@ -27,7 +27,7 @@ export const fetchData = async () => {
                 delete data[keyName]
                 return false
             }
-    
+
             var tempObject = {
                 artist: data[keyName]["Artist"],
                 album: data[keyName]["Albums"],
