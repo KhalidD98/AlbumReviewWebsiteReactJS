@@ -9,11 +9,11 @@ import GitHubIcon from '@material-ui/icons/GitHub';
 import LinkedInIcon from '@material-ui/icons/LinkedIn';
 import Container from '@material-ui/core/Container';
 import AlbumList from './AlbumList'
-
+import CircularProgress from '@material-ui/core/CircularProgress';
 
 const useStyles = makeStyles({
   searchGridItem: {
-    padding: '100px'
+    padding: '4rem'
   },
   searchBar: {
     background: '#424242',
@@ -28,10 +28,10 @@ const useStyles = makeStyles({
     width: '100%',
     height: '100px',
     marginTop: '30px',
-    position:'relative',
-    left:'0',
-    bottom:'0',
-    right:'0',
+    position: 'relative',
+    left: '0',
+    bottom: '0',
+    right: '0',
   },
   copyrightText: {
     fontSize: '11px',
@@ -50,6 +50,17 @@ const useStyles = makeStyles({
     cursor: 'pointer',
     paddingLeft: '5px',
     paddingRight: '5px'
+  },
+  warning: {
+    color: '#616161',
+    marginBottom: '4rem',
+    textAlign: 'center'
+  },
+  description: {
+    color: '#9e9e9e',
+    marginBottom: '1rem',
+    width: '30vw',
+    textAlign: 'center'
   }
 })
 
@@ -81,7 +92,7 @@ function App() {
         direction="column"
         alignItems="center"
         justify="center"
-        style={{ paddingBottom:'60px' }}>
+        style={{ paddingBottom: '60px' }}>
 
         {/* Search Bar */}
         <Grid item className={classes.searchGridItem}>
@@ -90,10 +101,27 @@ function App() {
           </form>
         </Grid>
 
-        {/* Album List */}
-        <Grid item className={classes.albumList}>
-          <AlbumList data={data} searchTerm={searchTerm}/>
+        {/* Warning text */}
+        <Grid item>
+          <Typography className={classes.description}>
+            Website created to show off Album Reviews from 3 guys who just love music. Have a favorite album or
+            artist? Search it above and see what we thought of it.
+          </Typography>
+          <i>
+            <Typography className={classes.warning}> *If covers are not showing, please refresh page</Typography>
+          </i>
         </Grid>
+
+        {/* Album List */}
+        {data.length === 0 &&
+          <CircularProgress />
+        }
+        
+        {data.length > 0 &&
+          <Grid item className={classes.albumList}>
+            <AlbumList data={data} searchTerm={searchTerm} />
+          </Grid>
+        }
 
         {/* Webpage Style */}
         <style>{'body { background-color: #121212; }'}</style>
@@ -102,13 +130,13 @@ function App() {
       {/* Footer */}
       <AppBar className={classes.footerBackground}>
         <Container maxWidth="md">
-          
+
           {/* Icons */}
           <Grid container direction="row"
             justify="center"
             alignItems="center" className={classes.iconGrid} >
-            <GitHubIcon onClick={githubClicked} class={classes.Icons}></GitHubIcon>
-            <LinkedInIcon onClick={linkedInClicked} class={classes.Icons}></LinkedInIcon>
+            <GitHubIcon onClick={githubClicked} className={classes.Icons}></GitHubIcon>
+            <LinkedInIcon onClick={linkedInClicked} className={classes.Icons}></LinkedInIcon>
           </Grid>
 
           {/* Copyright Information */}
@@ -122,7 +150,7 @@ function App() {
             <Typography className={classes.copyrightText}>2021 Khalid Dakak</Typography>
           </Grid>
         </Container>
-       </AppBar>
+      </AppBar>
     </>
   )
 }
