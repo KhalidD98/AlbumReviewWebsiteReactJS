@@ -3,6 +3,7 @@ import Album from './Album'
 import Grid from '@material-ui/core/Grid'
 import { makeStyles } from '@material-ui/core'
 
+
 const useStyles = makeStyles((theme) => ({
   grid: {
     display: 'flex',
@@ -26,23 +27,23 @@ const useStyles = makeStyles((theme) => ({
   }
 }));
 
-export default function AlbumList({data, searchTerm}) {
+export default function AlbumList({ data, searchTerm }) {
   const classes = useStyles();
 
   return (
     <div className={classes.grid}>
       <Grid container className={classes.center}>
         {data.filter(temp => {
-          if(temp.artist.toLowerCase().includes(searchTerm.toLowerCase())){
+          if (temp.artist.toLowerCase().includes(searchTerm.toLowerCase())) {
             return temp.artist.toLowerCase().includes(searchTerm.toLowerCase())
           }
-          else if(temp.album.toLowerCase().includes(searchTerm.toLowerCase())){
+          else if (temp.album.toLowerCase().includes(searchTerm.toLowerCase())) {
             return temp.album.toLowerCase().includes(searchTerm.toLowerCase())
           }
           return null
         }).map((value, index) => {
           // Remove albums with no reviews
-          if(!value.kdRating && !value.connorRating && !value.kyleRating){
+          if (!value.kdRating && !value.connorRating && !value.kyleRating) {
             return null
           }
           return (
